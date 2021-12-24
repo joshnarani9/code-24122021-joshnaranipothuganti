@@ -10,7 +10,7 @@ def read():
 
 setup(
     name="bmi_calculator",
-    version="0.0.1",
+    version="0.0.2",
     author="Joshna Rani",
     author_email="joshnarani97@gmail.com",
     description="bmi_calculator and utils",

@@ -1,28 +1,9 @@
 """
 author@joshnarani
 """
+import json
 
 import pandas as pd
-
-
-def exe_main(args):
-    if args:
-        if type(args) == list:
-            """if list of json objects passed"""
-            df_data = pd.DataFrame(args)
-        else:
-            """ if single json object is passed"""
-            df_data = pd.DataFrame([args])
-        df_data['HeightCm'] = df_data['HeightCm'] / 100
-        df_data['HeightCm'] = df_data['HeightCm'].apply(lambda x: x * x)
-        df_data['BMI'] = df_data['WeightKg'] / df_data['HeightCm']
-        df_data['BMI Category'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[0])
-        df_data['Health risk'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[1])
-        print(df_data.head)
-        return df_data
-    else:
-        df_data = pd.DataFrame()
-        return df_data
 
 
 def bmi_cal(val: float) -> tuple[str, str]:
@@ -47,7 +28,31 @@ def bmi_cal(val: float) -> tuple[str, str]:
     return bmi_category, health_risk
 
 
+class BmiCalculator:
+
+    def exe_main(self, args):
+        if args:
+            json_data = args
+            if type(json_data) == list:
+                """if list of json objects passed"""
+                df_data = pd.DataFrame(json_data)
+            else:
+                """ if single json object is passed"""
+                df_data = pd.DataFrame([json_data])
+            df_data['HeightCm'] = df_data['HeightCm'] / 100
+            df_data['HeightCm'] = df_data['HeightCm'].apply(lambda x: x * x)
+            df_data['BMI'] = df_data['WeightKg'] / df_data['HeightCm']
+            df_data['BMI Category'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[0])
+            df_data['Health risk'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[1])
+            print(df_data.head)
+            return df_data
+        else:
+            df_data = pd.DataFrame()
+            return df_data
+
+
 if __name__ == '__main__':
     import sys
 
-    exe_main(sys.argv[1])
+    obj = BmiCalculator()
+    obj.exe_main(sys.argv[1])
