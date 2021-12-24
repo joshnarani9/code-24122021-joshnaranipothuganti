@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd bmi_calculator && python3 setup.py
+cd bmi_calculator && py setup.py
