@@ -10,16 +10,19 @@ from bmi_calculator import divide, bmi_cal
 
 class BmiCalculator:
 
-    def exe_main(self, file: str, filepath: bool = True):
-        if filepath:
+    def exe_main(self, file: str):
+        if file:
             """ args is filepath with json input data"""
             with open(file, 'r') as content:
                 json_inp = json.load(content)
+            df = self.bmi_data(json_inp)
         else:
             """args here passed is json object"""
             print("Info: Input file path is not provided")
-            json_inp = json.loads(file)
+            df = None
+        return df
 
+    def bmi_data(self, json_inp):
         if type(json_inp) == list:
             """if list of json objects passed"""
             df_data = pd.DataFrame(json_inp)
@@ -39,4 +42,5 @@ class BmiCalculator:
         print("Info: Successfully found count of all category_with_riskfactor")
         print("Info: output count is...")
         print(df)
+
         return df
