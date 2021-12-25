@@ -3,56 +3,40 @@ author@joshnarani
 """
 import json
 
+import numpy as np
 import pandas as pd
-
-
-def bmi_cal(val: float) -> tuple[str, str]:
-    if val <= 18.4:
-        bmi_category = "Underweight"
-        health_risk = "Malnutrition risk"
-    elif 18.5 <= val <= 24.9:
-        bmi_category = "Normal weight"
-        health_risk = "Low risk"
-    elif 25 <= val <= 29.9:
-        bmi_category = "Overweight"
-        health_risk = "Enhanced risk"
-    elif 30 <= val <= 34.9:
-        bmi_category = "Moderately obese"
-        health_risk = "Medium risk"
-    elif 35 <= val <= 39.9:
-        bmi_category = "Severely obese"
-        health_risk = "High risk"
-    else:
-        bmi_category = "Very severely obese"
-        health_risk = "Very high risk"
-    return bmi_category, health_risk
+from bmi_calculator import divide, bmi_cal
 
 
 class BmiCalculator:
 
-    def exe_main(self, args):
-        if args:
-            json_data = args
-            if type(json_data) == list:
-                """if list of json objects passed"""
-                df_data = pd.DataFrame(json_data)
-            else:
-                """ if single json object is passed"""
-                df_data = pd.DataFrame([json_data])
-            df_data['HeightCm'] = df_data['HeightCm'] / 100
-            df_data['HeightCm'] = df_data['HeightCm'].apply(lambda x: x * x)
-            df_data['BMI'] = df_data['WeightKg'] / df_data['HeightCm']
-            df_data['BMI Category'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[0])
-            df_data['Health risk'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[1])
-            print(df_data.head)
-            return df_data
+    def exe_main(self, file: str, filepath: bool = True):
+        if filepath:
+            """ args is filepath with json input data"""
+            with open(file, 'r') as content:
+                json_inp = json.load(content)
         else:
-            df_data = pd.DataFrame()
-            return df_data
+            """args here passed is json object"""
+            print("Info: Input file path is not provided")
+            json_inp = json.loads(file)
 
-
-if __name__ == '__main__':
-    import sys
-
-    obj = BmiCalculator()
-    obj.exe_main(sys.argv[1])
+        if type(json_inp) == list:
+            """if list of json objects passed"""
+            df_data = pd.DataFrame(json_inp)
+        else:
+            print(type(json_inp))
+            """ if single json object is passed"""
+            df_data = pd.DataFrame([json_inp])
+        df_data['HeightCm'] = df_data['HeightCm'].astype(float)
+        df_data['WeightKg'] = df_data['WeightKg'].astype(float)
+        df_data['HeightCm'] = df_data['HeightCm'] / 100
+        df_data['BMI'] = np.vectorize(divide)(df_data['WeightKg'], (df_data['HeightCm']).pow(2))
+        df_data['BMI Category'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[0])
+        df_data['Health risk'] = df_data['BMI'].apply(lambda x: bmi_cal(x)[1])
+        df_data['cat&risk'] = df_data['BMI Category'] + '_' + df_data['Health risk']
+        df = df_data['cat&risk'].value_counts().rename_axis('cat_and_risk').reset_index(name='counts')
+        df = dict(zip(df['cat_and_risk'], df['counts']))
+        print("Info: Successfully found count of all category_with_riskfactor")
+        print("Info: output count is...")
+        print(df)
+        return df
