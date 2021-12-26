@@ -29,3 +29,13 @@ category&risk and its count...
 
 {'Moderately obese_Medium risk': 3, 'Normal weight_Low risk': 2, 'Overweight_Enhanced risk': 1}
 
+_**Running with Docker environment**_
+
+docker build -t bmic .
+
+docker run -it bmic /bin/bash
+
+
+sh bin/setup.sh 
+
+sh bin/run_bmi.sh bin/input_data.json
