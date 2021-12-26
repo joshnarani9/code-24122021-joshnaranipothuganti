@@ -3,6 +3,7 @@ author@joshnarani
 """
 """ Includes utilities required for bmi calculation"""
 
+from typing import Tuple
 
 def divide(a, b):
     if b == 0:
@@ -10,7 +11,7 @@ def divide(a, b):
     return float(a) / float(b)
 
 
-def bmi_cal(val: float) -> tuple[str, str]:
+def bmi_cal(val: float) -> Tuple[str, str]:
     if val <= 18.4:
         bmi_category = "Underweight"
         health_risk = "Malnutrition risk"

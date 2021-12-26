@@ -11,7 +11,7 @@ def read(fname):
 
 setup(
     name="bmi_calculator",
-    version="0.1.4",
+    version="0.1.5",
     author="Joshna Rani",
     author_email="joshnarani97@gmail.com",
     description="bmi_calculator and utils",

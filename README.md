@@ -11,6 +11,21 @@ After running setup install , build scripts gets generated
 
 Binding source code into package and Run file from bin folder.
 
-example:
+_steps to setup,build and test without any environment to run locally::::_
 
-bin/py run.py '[{"Gender": "Male", "HeightCm": 171, "WeightKg": 96 }]'
+cd bmi_calculator
+
+py setup.py install test (setup build and runs testcases)
+
+cd ..
+
+cd bin
+
+py run.py input_data.json  (argument of input path file)
+
+**output:**
+
+category&risk and its count...
+
+{'Moderately obese_Medium risk': 3, 'Normal weight_Low risk': 2, 'Overweight_Enhanced risk': 1}
+
