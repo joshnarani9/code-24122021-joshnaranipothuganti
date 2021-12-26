@@ -2,3 +2,4 @@
 build
 dist
 bmi_calculator.egg-info
+__pycache__
