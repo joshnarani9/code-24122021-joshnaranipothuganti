@@ -11,11 +11,11 @@ def read(fname):
 
 setup(
     name="bmi_calculator",
-    version="0.0.9",
+    version="0.1.4",
     author="Joshna Rani",
     author_email="joshnarani97@gmail.com",
     description="bmi_calculator and utils",
     packages=find_packages(include=['bmi_calculator', 'bmi_calculator*']),
-    python_requires='>3.9',
+    python_requires='>3.7',
     test_suite="tests.test_utils"
 )
