@@ -41,7 +41,6 @@ class BmiCalculator:
                 json_inp = json.load(content)
             df = bmi_data(json_inp)
         else:
-            """args here passed is json object"""
             print("Info: Input file path is not provided")
             df = None
         return df
