@@ -1,13 +1,9 @@
 [
+  {"Gender": "Male", "HeightCm": 171, "WeightKg": 96},
   {
     "Gender": "Male",
-    "HeightCm": 171,
-    "WeightKg": 96
-  },
-  {
-    "Gender": "Male",
-    "HeightCm": 161,
-    "WeightKg": 85
+    "WeightKg": 85,
+    "HeightCm": 161
   },
   {
     "Gender": "Male",

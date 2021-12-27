@@ -36,6 +36,6 @@ docker build -t bmic .
 docker run -it bmic /bin/bash
 
 
-sh bin/setup.sh 
+sh bin/run_tests.sh (setup build and test)
 
 sh bin/run_bmi.sh bin/input_data.json

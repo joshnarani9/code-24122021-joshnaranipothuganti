@@ -36,13 +36,9 @@ class BmiCalculator:
 
     def exe_main(self, file):
         if file:
-            try:
-                """ file is filepath with json input data"""
-                with open(file, 'r') as content:
-                    json_inp = json.load(content)
-            except:
-                """Enters here if file is json object"""
-                json_inp = json.load(file)
+            """ file is filepath with json input data"""
+            with open(file, 'r') as content:
+                json_inp = json.load(content)
             df = bmi_data(json_inp)
         else:
             """args here passed is json object"""

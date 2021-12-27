@@ -6,7 +6,8 @@ from setuptools import setup, find_packages
 
 requires = (
     "numpy==1.21.5",
-    "pandas==1.3.5"
+    "pandas==1.3.5",
+    "json5==0.9.5"
 )
 
 
@@ -16,7 +17,7 @@ def read(fname):
 
 setup(
     name="bmi_calculator",
-    version="0.1.6",
+    version="0.1.8",
     author="Joshna Rani",
     author_email="joshnarani97@gmail.com",
     description="bmi_calculator and utils",
