@@ -38,5 +38,8 @@ docker run -it bmic /bin/bash
 
 sh bin/run_tests.sh (setup build and runs test cases as well)
 
-sh bin/run_bmi.sh bin/input_data.json
+sh bin/run_bmi.sh bin/input_data.json  
 
+output screenshot:
+
+![img.png](img.png)
